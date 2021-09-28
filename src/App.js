@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { useState } from "react";
+import {Form} from "./components/Form.js";
+import "./App.css"
+import Address from "./components/Address.js"
+const App = () => {
+  const [output, setOutput] = useState([]);
+  const handleForm = (data) => {
+    setOutput([...output, data])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <h1>Address Book</h1>
+      <div className="box">
+        <Form handleForm={handleForm}/>
+        {output.map((item, index) => (
+          <Address num={index + 1} key={index} name={item.name} number={item.number}/>))}
+      </div>
     </div>
   );
-}
+};
+
 
 export default App;
